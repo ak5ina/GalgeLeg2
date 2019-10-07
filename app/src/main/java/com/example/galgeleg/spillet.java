@@ -2,6 +2,8 @@ package com.example.galgeleg;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,11 +18,13 @@ public class spillet extends AppCompatActivity {
     private TextView text_intro;
     private TextView text_outputt;
     private TextView text_ordet;
+    int antal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spillet);
+        antal = 0;
 
 
         gl = new Galgelogik();
@@ -44,6 +48,7 @@ public class spillet extends AppCompatActivity {
 
 
                 if (stringGues.length() == 1) {
+                    antal++;
                     gl.gætBogstav(stringGues);
                     text_ordet.setText(gl.getSynligtOrd());
                     //Rigtigt gæt
@@ -58,7 +63,10 @@ public class spillet extends AppCompatActivity {
 
                     if (gl.erSpilletSlut()){
                         if (gl.erSpilletVundet()){
-                            text_intro.setText("vundet");
+                            Intent in2 = new Intent(spillet.this, gameWon.class);
+                            in2.putExtra("forkert", Integer.toString(gl.getAntalForkerteBogstaver()));
+                            in2.putExtra("antal", Integer.toString(antal));
+                            startActivity(in2);
                         }
                         else if (gl.erSpilletTabt()){
                             text_intro.setText("tabt");

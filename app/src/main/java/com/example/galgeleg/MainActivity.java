@@ -1,11 +1,16 @@
 package com.example.galgeleg;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), spillet.class);
+                in.putExtra("antal2","hejsa antal2");
                 startActivity(in);
             }
         });
@@ -33,5 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
+
+
+
 }
