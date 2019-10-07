@@ -56,8 +56,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkSharedPreferences(){
-        String errors = mpreferences.getString(getString(R.string.key_error), "");
-        String time = mpreferences.getString(getString(R.string.key_time), "");
+        String errors = mpreferences.getString("new", "Ingenting");
+        TextView tv4 = findViewById(R.id.test);
+
+        tv4.setText(errors);
+
+
     }
 
 

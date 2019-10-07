@@ -5,26 +5,38 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.Time;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class spillet extends AppCompatActivity {
 
+    //forsøg med sharedpref
+    private SharedPreferences mpreferences;
+    private SharedPreferences.Editor mEditor;
+    //
     private EditText guess;
     private Galgelogik gl;
     private TextView text_intro;
     private TextView text_outputt;
     private TextView text_ordet;
     int antal;
-    LocalDateTime startTime;
+    LocalTime startTime;
+    LocalTime endTime;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -32,8 +44,13 @@ public class spillet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spillet);
         antal = 0;
-        startTime = LocalDateTime.now();
+        startTime = LocalTime.now();
 
+        //sharedpref
+        mpreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mpreferences.edit();
+
+        //
         gl = new Galgelogik();
         text_intro = findViewById(R.id.textView);
         text_ordet = findViewById(R.id.text_ordet);
@@ -73,6 +90,20 @@ public class spillet extends AppCompatActivity {
                             Intent in2 = new Intent(spillet.this, gameWon.class);
                             in2.putExtra("forkert", Integer.toString(gl.getAntalForkerteBogstaver()));
                             in2.putExtra("antal", Integer.toString(antal));
+
+                            //converter tid
+                            endTime = LocalTime.now();
+
+                            long time = Duration.between(startTime,endTime).toMillis();
+                            String timeString = Long.toString(time/1000);
+
+                            //sharedpref
+                            String saveableString = timeString + "|" + gl.getAntalForkerteBogstaver();
+                            mEditor.putString("new", saveableString);
+                            mEditor.commit();
+
+                            //---
+
                             startActivity(in2);
                         }
                         else if (gl.erSpilletTabt()){

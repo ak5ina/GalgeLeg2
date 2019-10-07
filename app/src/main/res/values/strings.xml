@@ -7,8 +7,6 @@
 
 
 <!--    Key values   -->
-    <string name="key_error">nr_of_errors</string>
-    <string name="key_time">time_to_finish</string>
 
 
 </resources>
