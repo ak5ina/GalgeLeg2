@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">S180905 DukkenHænger</string>
+    <string name="game_start_string">Ordet du skal gætte er random valgt fra nettet!</string>
+
+</resources>
