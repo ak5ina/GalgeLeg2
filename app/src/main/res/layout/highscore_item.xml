@@ -6,15 +6,16 @@
     <TextView
         android:id="@+id/item_header"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="50dp"
         android:text="hej"
-        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/item_errors"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="30dp"
         android:text="hej"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -22,7 +23,7 @@
     <TextView
         android:id="@+id/item_time"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="30dp"
         android:text="hej"
         android:textSize="18sp"
         android:textStyle="bold" />
