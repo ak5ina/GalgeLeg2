@@ -8,6 +8,7 @@
     android:background="@drawable/background2">
 
     <ListView
+        android:id="@+id/list_try"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="98dp"

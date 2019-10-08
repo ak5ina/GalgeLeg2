@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         btn_highscore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent in = new Intent(getApplicationContext(), Highscore.class);
+                startActivity(in);
             }
         });
 
@@ -81,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
         tv2.setText(forste);
         tv3.setText(anden);
         tv4.setText(tredje);
-
-
     }
 
     @Override

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="115dp">
 
 
     <LinearLayout
@@ -26,13 +26,13 @@
             android:orientation="vertical">
 
 
-
             <TextView
                 android:id="@+id/item_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="hej"
                 android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
@@ -40,20 +40,22 @@
                 android:id="@+id/item_errors"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
                 android:text="hej"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <TextView
                 android:id="@+id/item_time"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
                 android:text="hej"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

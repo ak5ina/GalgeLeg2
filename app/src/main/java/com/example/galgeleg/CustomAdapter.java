@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CumstomAdapter extends BaseAdapter {
+public class CustomAdapter extends BaseAdapter {
 
     Context context;
     static LayoutInflater inflater = null;
@@ -17,7 +17,7 @@ public class CumstomAdapter extends BaseAdapter {
     String time[];
     String errors[];
 
-    public CumstomAdapter(Context context, int icons[], String header[], String time[], String errors[]){
+    public CustomAdapter(Context context, int icons[], String header[], String time[], String errors[]){
 
         this.context = context;
         this.icons = icons;
