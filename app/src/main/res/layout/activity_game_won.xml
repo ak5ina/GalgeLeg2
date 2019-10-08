@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gameWon"
-    android:background="@drawable/background2">
+    android:background="@drawable/background2"
+    tools:context=".gameWon">
 
     <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
+        android:id="@+id/text_won_errors"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="TextView"
@@ -17,7 +17,19 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/test23" />
+        app:layout_constraintTop_toBottomOf="@+id/text_won_turns" />
+
+    <TextView
+        android:id="@+id/text_won_time"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_won_errors" />
 
     <TextView
         android:id="@+id/textView2"
@@ -33,15 +45,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/test23"
-        android:layout_width="wrap_content"
+        android:id="@+id/text_won_turns"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="TextView"
+        android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/btn_start_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Start siden"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_won_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

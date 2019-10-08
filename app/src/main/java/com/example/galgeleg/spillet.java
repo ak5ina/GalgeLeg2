@@ -98,19 +98,32 @@ public class spillet extends AppCompatActivity {
                             String timeString = Long.toString(time/1000);
 
                             //sharedpref
-                            String saveableString = timeString + "|" + gl.getAntalForkerteBogstaver();
+                            String saveableString = timeString + " " + gl.getAntalForkerteBogstaver();
                             mEditor.putString("new", saveableString);
                             mEditor.commit();
 
                             //---
 
+                            in2.putExtra("tid",timeString);
+
                             startActivity(in2);
                         }
                         else if (gl.erSpilletTabt()){
-                            text_intro.setText("tabt");
+
+
+                            Intent in_tabt = new Intent(spillet.this, gameLost.class);
+                            in_tabt.putExtra("ord", gl.getOrdet());
+                            startActivity(in_tabt);
+
                         }
                         else {
                             text_intro.setText("fejl");
+                            try {
+                                Thread.sleep(2500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            finish();
                         }
                     }
 
@@ -152,4 +165,9 @@ public class spillet extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+    }
 }

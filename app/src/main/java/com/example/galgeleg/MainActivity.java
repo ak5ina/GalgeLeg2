@@ -1,15 +1,11 @@
 package com.example.galgeleg;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -56,11 +52,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkSharedPreferences(){
-        String errors = mpreferences.getString("new", "Ingenting");
-        TextView tv4 = findViewById(R.id.test);
 
-        tv4.setText(errors);
+        //finder elementerne
+        String errors = mpreferences.getString("1", "fejl");
+        String forste = mpreferences.getString("2", "fejl");
+        String anden = mpreferences.getString("3", "fejl");
+        String tredje = mpreferences.getString("4", "fejl");
 
+        //Finder textview objekterne
+        TextView tv = findViewById(R.id.text_won_errors);
+        TextView tv2 = findViewById(R.id.test2);
+        TextView tv3 = findViewById(R.id.test3);
+        TextView tv4 = findViewById(R.id.test4);
+
+        //Indsætter værdierne i textview objekterne
+        tv.setText(errors);
+        tv2.setText(forste);
+        tv3.setText(anden);
+        tv4.setText(tredje);
+
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        checkSharedPreferences();
 
     }
 
