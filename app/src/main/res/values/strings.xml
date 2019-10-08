@@ -3,7 +3,14 @@
     <string name="game_start_string">Ordet du skal gætte er random valgt fra nettet!</string>
     <string name="text_won_game">TILLYKKE! du har vundet hanging doll... men kan du gøre det IGEN?!</string>
     <string name="text_lost_game">WHAT?! TABTE DU LIGE??? øhh ja det tror jeg nok... pyyyyh, prøv og hør om du kan tage 9. klasse om igen!</string>
+    <string name="dialog_text">
+        Spillet er det klassiske Hanging man hvor man skal gætte på hvilket ord det er. \n
+        Du starter med 6 liv og hvergang du gætter på et forkert bogstav mister du et liv. \n
+        Hvis du tror du ved hvad ordet er, skal du gætte hvert enkelt bogstav frem til ordet, når du har gættet alle ordene vil din tid og antal forkert blive gemt som en score. \n \n
+        Under highscore vil du kunne se dine 5 bedste forsøg, de er blevet gemt med en tid og antal fejl. Når den skal kontrollere med et nyt forsøg checker den først om der er mindre fejl i det nye forsøg.
+        hvis det er det samme antal fejl, vil den checkke om tiden var hurtigere. Var tiden hurtigere er det nye resultat gemt.
 
+    </string>
     <!--    Key values   -->
 
 

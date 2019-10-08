@@ -86,6 +86,8 @@ public class spillet extends AppCompatActivity {
                     }
 
                     if (gl.erSpilletSlut()){
+
+                        //man vinder
                         if (gl.erSpilletVundet()){
                             Intent in2 = new Intent(spillet.this, gameWon.class);
                             in2.putExtra("forkert", Integer.toString(gl.getAntalForkerteBogstaver()));
@@ -108,6 +110,8 @@ public class spillet extends AppCompatActivity {
 
                             startActivity(in2);
                         }
+
+                        //man taber
                         else if (gl.erSpilletTabt()){
 
 
@@ -116,6 +120,8 @@ public class spillet extends AppCompatActivity {
                             startActivity(in_tabt);
 
                         }
+
+                        //fejl i spillet (Den lukker og går tilbage til MainActivity)
                         else {
                             text_intro.setText("fejl");
                             try {
