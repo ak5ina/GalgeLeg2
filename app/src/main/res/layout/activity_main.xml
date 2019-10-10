@@ -8,30 +8,6 @@
     android:background="@drawable/background2">
 
 
-    <TextView
-        android:id="@+id/test3"
-        android:layout_width="55dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="44dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/btn_help"
-        app:layout_constraintTop_toBottomOf="@+id/btn_highscore" />
-
-    <TextView
-        android:id="@+id/test4"
-        android:layout_width="55dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="100dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/btn_help"
-        app:layout_constraintTop_toBottomOf="@+id/btn_highscore" />
-
     <Button
         android:id="@+id/btn_Start"
         android:layout_width="150dp"
@@ -59,30 +35,6 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_Start"
         app:layout_constraintStart_toStartOf="@+id/btn_Start"
         app:layout_constraintTop_toBottomOf="@+id/btn_Start" />
-
-    <TextView
-        android:id="@+id/text_won_errors"
-        android:layout_width="55dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/btn_help"
-        app:layout_constraintTop_toBottomOf="@+id/btn_highscore" />
-
-    <TextView
-        android:id="@+id/test2"
-        android:layout_width="55dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="92dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/btn_help"
-        app:layout_constraintTop_toBottomOf="@+id/btn_highscore" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,16 @@ public class spillet extends AppCompatActivity {
         mEditor = mpreferences.edit();
 
         //
+
         gl = new Galgelogik();
+
+        try {
+            gl.hentOrdFraDr();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         text_intro = findViewById(R.id.textView);
         text_ordet = findViewById(R.id.text_ordet);
         text_outputt = findViewById(R.id.text_output);

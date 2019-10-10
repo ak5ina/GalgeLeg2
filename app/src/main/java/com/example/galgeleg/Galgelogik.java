@@ -1,5 +1,7 @@
 package com.example.galgeleg;
 
+import android.os.StrictMode;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,17 +22,20 @@ public class Galgelogik {
   private boolean spilletErVundet;
   private boolean spilletErTabt;
 
-  public Galgelogik() {
-    muligeOrd.add("bil");
-    muligeOrd.add("computer");
-    muligeOrd.add("programmering");
-    muligeOrd.add("motorvej");
-    muligeOrd.add("busrute");
-    muligeOrd.add("gangsti");
-    muligeOrd.add("skovsnegl");
-    muligeOrd.add("solsort");
-    muligeOrd.add("nitten");
-    nulstil();
+  public Galgelogik(){
+//    muligeOrd.add("bil");
+//    muligeOrd.add("computer");
+//    muligeOrd.add("programmering");
+//    muligeOrd.add("motorvej");
+//    muligeOrd.add("busrute");
+//    muligeOrd.add("gangsti");
+//    muligeOrd.add("skovsnegl");
+//    muligeOrd.add("solsort");
+//    muligeOrd.add("nitten");
+//    nulstil();
+
+
+
   }
 
 
@@ -128,7 +133,12 @@ public class Galgelogik {
 
   public static String hentUrl(String url) throws IOException {
     System.out.println("Henter data fra " + url);
+
+    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+    StrictMode.setThreadPolicy(policy);
+
     BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
+
     StringBuilder sb = new StringBuilder();
     String linje = br.readLine();
     while (linje != null) {
@@ -144,6 +154,7 @@ public class Galgelogik {
    */
   public void hentOrdFraDr() throws Exception {
     String data = hentUrl("https://dr.dk");
+
     //System.out.println("data = " + data);
 
     data = data.substring(data.indexOf("<body")). // fjern headere

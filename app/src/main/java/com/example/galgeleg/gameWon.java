@@ -75,7 +75,7 @@ public class gameWon extends AppCompatActivity {
         bigList.add(mpreferences.getString("2","fejl"));
         bigList.add(mpreferences.getString("1","fejl"));
 
-        //Smider værdierne over i en scoreliste som jeg rangere senere
+        //Smider værdierne over i en scoreliste som jeg rangere     senere
         for (String a : bigList) {
             if (!a.equals("fejl")) {
                 String[] splitterList = a.split(" ", 2);
