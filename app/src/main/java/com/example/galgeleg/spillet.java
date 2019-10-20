@@ -156,6 +156,8 @@ public class spillet extends AppCompatActivity {
     }
 
     public void opdaterBilled(int liv){
+
+        //ku ha været int Array
         ImageView pic = findViewById(R.id.image_galge);
         switch (liv){
             case 1:
