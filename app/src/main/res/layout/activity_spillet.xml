@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".spillet"
-    android:background="@drawable/background2">
+    android:background="@drawable/background2"
+    tools:context=".spillet">
 
     <TextView
         android:id="@+id/textView"
@@ -23,13 +23,15 @@
     <EditText
         android:id="@+id/game_input"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="436dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="328dp"
+        android:background="@drawable/transparent"
+        android:gravity="center"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_output" />
 
     <Button
         android:id="@+id/btn_guess"

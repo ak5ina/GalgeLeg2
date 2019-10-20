@@ -87,11 +87,13 @@ public class spillet extends AppCompatActivity {
                     //Rigtigt gæt
                     if (gl.erSidsteBogstavKorrekt()) {
                         text_outputt.setText("Bogstavet er i ordet! Du gættede: " + stringGues);
+                        guess.setText("");
                     }
                     //Forkert gæt
                     else {
                         text_outputt.setText("Bogstavet er ikke i ordet, du gættede: " + stringGues);
                         opdaterBilled(gl.getAntalForkerteBogstaver());
+                        guess.setText("");
                     }
 
                     if (gl.erSpilletSlut()){
