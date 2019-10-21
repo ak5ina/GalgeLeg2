@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -50,7 +52,6 @@ public class spillet extends AppCompatActivity {
         mpreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mpreferences.edit();
 
-        //
 
         gl = new Galgelogik();
 
@@ -86,12 +87,12 @@ public class spillet extends AppCompatActivity {
                     text_ordet.setText(gl.getSynligtOrd());
                     //Rigtigt gæt
                     if (gl.erSidsteBogstavKorrekt()) {
-                        text_outputt.setText("Bogstavet er i ordet! Du gættede: " + stringGues);
+                        text_outputt.setText(text_outputt.getText().toString() + stringGues + ", ");
                         guess.setText("");
                     }
                     //Forkert gæt
                     else {
-                        text_outputt.setText("Bogstavet er ikke i ordet, du gættede: " + stringGues);
+                        text_outputt.setText(text_outputt.getText().toString() + stringGues + ", ");
                         opdaterBilled(gl.getAntalForkerteBogstaver());
                         guess.setText("");
                     }
