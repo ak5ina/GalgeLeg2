@@ -121,15 +121,16 @@ public class spillet extends AppCompatActivity {
                             in2.putExtra("tid",timeString);
 
                             startActivity(in2);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         }
 
                         //man taber
                         else if (gl.erSpilletTabt()){
-
-
+                            
                             Intent in_tabt = new Intent(spillet.this, gameLost.class);
                             in_tabt.putExtra("ord", gl.getOrdet());
                             startActivity(in_tabt);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                         }
 
@@ -189,5 +190,11 @@ public class spillet extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         finish();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }
