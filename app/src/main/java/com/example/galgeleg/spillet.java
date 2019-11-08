@@ -31,14 +31,14 @@ public class spillet extends AppCompatActivity {
     private SharedPreferences mpreferences;
     private SharedPreferences.Editor mEditor;
     //
-    private EditText guess;
     private Galgelogik gl;
-    private TextView text_intro;
-    private TextView text_outputt;
     private TextView text_ordet;
     int antal;
     LocalTime startTime;
     LocalTime endTime;
+    Button btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ, btnÆ, btnØ, btnÅ;
+    View.OnClickListener myClickListner;
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -61,100 +61,169 @@ public class spillet extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        text_intro = findViewById(R.id.textView);
         text_ordet = findViewById(R.id.text_ordet);
-        text_outputt = findViewById(R.id.text_output);
         text_ordet.setText(gl.getSynligtOrd());
 
-
-        //ord / bogstav man har gættet.
-        guess = findViewById(R.id.game_input);
-
-
-
-        //knappen
-        Button btn = findViewById(R.id.btn_guess);
-        btn.setOnClickListener(new View.OnClickListener() {
+        //metoden
+        View.OnClickListener myClickListner = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stringGues = guess.getText().toString();
 
+                v.setEnabled(false);
 
-                if (stringGues.length() == 1) {
-                    antal++;
-                    gl.gætBogstav(stringGues);
-                    text_ordet.setText(gl.getSynligtOrd());
-                    //Rigtigt gæt
-                    if (gl.erSidsteBogstavKorrekt()) {
-                        text_outputt.setText(text_outputt.getText().toString() + stringGues + ", ");
-                        guess.setText("");
+                String tag = (String) v.getTag();
+                antal++;
+                gl.gætBogstav(tag);
+                text_ordet.setText(gl.getSynligtOrd());
+
+                if (!gl.erSidsteBogstavKorrekt()) {
+                    opdaterBilled(gl.getAntalForkerteBogstaver());
+                }
+
+                if (gl.erSpilletSlut()){
+
+                    //man vinder
+                    if (gl.erSpilletVundet()){
+                        Intent in2 = new Intent(spillet.this, gameWon.class);
+                        in2.putExtra("forkert", Integer.toString(gl.getAntalForkerteBogstaver()));
+                        in2.putExtra("antal", Integer.toString(antal));
+
+                        //converter tid
+                        endTime = LocalTime.now();
+
+                        long time = Duration.between(startTime,endTime).toMillis();
+                        String timeString = Long.toString(time/1000);
+
+                        //sharedpref
+                        String saveableString = timeString + " " + gl.getAntalForkerteBogstaver();
+                        mEditor.putString("new", saveableString);
+                        mEditor.commit();
+
+                        //---
+
+                        in2.putExtra("tid",timeString);
+
+                        startActivity(in2);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
-                    //Forkert gæt
+
+                    //man taber
+                    else if (gl.erSpilletTabt()){
+
+                        Intent in_tabt = new Intent(spillet.this, gameLost.class);
+                        in_tabt.putExtra("ord", gl.getOrdet());
+                        startActivity(in_tabt);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                    }
+
+                    //fejl i spillet (Den lukker og går tilbage til MainActivity)
                     else {
-                        text_outputt.setText(text_outputt.getText().toString() + stringGues + ", ");
-                        opdaterBilled(gl.getAntalForkerteBogstaver());
-                        guess.setText("");
+                        text_ordet.setText("fejl");
+                        try {
+                            Thread.sleep(2500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        finish();
                     }
-
-                    if (gl.erSpilletSlut()){
-
-                        //man vinder
-                        if (gl.erSpilletVundet()){
-                            Intent in2 = new Intent(spillet.this, gameWon.class);
-                            in2.putExtra("forkert", Integer.toString(gl.getAntalForkerteBogstaver()));
-                            in2.putExtra("antal", Integer.toString(antal));
-
-                            //converter tid
-                            endTime = LocalTime.now();
-
-                            long time = Duration.between(startTime,endTime).toMillis();
-                            String timeString = Long.toString(time/1000);
-
-                            //sharedpref
-                            String saveableString = timeString + " " + gl.getAntalForkerteBogstaver();
-                            mEditor.putString("new", saveableString);
-                            mEditor.commit();
-
-                            //---
-
-                            in2.putExtra("tid",timeString);
-
-                            startActivity(in2);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        }
-
-                        //man taber
-                        else if (gl.erSpilletTabt()){
-                            
-                            Intent in_tabt = new Intent(spillet.this, gameLost.class);
-                            in_tabt.putExtra("ord", gl.getOrdet());
-                            startActivity(in_tabt);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-                        }
-
-                        //fejl i spillet (Den lukker og går tilbage til MainActivity)
-                        else {
-                            text_intro.setText("fejl");
-                            try {
-                                Thread.sleep(2500);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            finish();
-                        }
-                    }
-
                 }
-                else if (stringGues.length() < 1 || stringGues.length() > 1 || stringGues.length() == 0){
-                    text_intro.setText("Gæt kun et bogstav af gangen");
-                }
+
 
             }
-        });
-
+        };
         //forsæt her under
+
+        //alle knapperne
+        btnA = findViewById(R.id.buttonA);
+        btnA.setTag("a");
+        btnA.setOnClickListener(myClickListner);
+        btnB = findViewById(R.id.buttonB);
+        btnB.setTag("b");
+        btnB.setOnClickListener(myClickListner);
+        btnC = findViewById(R.id.buttonC);
+        btnC.setTag("c");
+        btnC.setOnClickListener(myClickListner);
+        btnD = findViewById(R.id.buttonD);
+        btnD.setTag("d");
+        btnD.setOnClickListener(myClickListner);
+        btnE = findViewById(R.id.buttonE);
+        btnE.setTag("e");
+        btnE.setOnClickListener(myClickListner);
+        btnF = findViewById(R.id.buttonF);
+        btnF.setTag("f");
+        btnF.setOnClickListener(myClickListner);
+        btnG = findViewById(R.id.buttonG);
+        btnG.setTag("g");
+        btnG.setOnClickListener(myClickListner);
+        btnH = findViewById(R.id.buttonH);
+        btnH.setTag("h");
+        btnH.setOnClickListener(myClickListner);
+        btnI = findViewById(R.id.buttonI);
+        btnI.setTag("i");
+        btnI.setOnClickListener(myClickListner);
+        btnJ = findViewById(R.id.buttonJ);
+        btnJ.setTag("j");
+        btnJ.setOnClickListener(myClickListner);
+        btnK = findViewById(R.id.buttonK);
+        btnK.setTag("k");
+        btnK.setOnClickListener(myClickListner);
+        btnL = findViewById(R.id.buttonL);
+        btnL.setTag("l");
+        btnL.setOnClickListener(myClickListner);
+        btnM = findViewById(R.id.buttonM);
+        btnM.setTag("m");
+        btnM.setOnClickListener(myClickListner);
+        btnN = findViewById(R.id.buttonN);
+        btnN.setTag("n");
+        btnN.setOnClickListener(myClickListner);
+        btnO = findViewById(R.id.buttonO);
+        btnO.setTag("o");
+        btnO.setOnClickListener(myClickListner);
+        btnP = findViewById(R.id.buttonP);
+        btnP.setTag("p");
+        btnP.setOnClickListener(myClickListner);
+        btnQ = findViewById(R.id.buttonQ);
+        btnQ.setTag("q");
+        btnQ.setOnClickListener(myClickListner);
+        btnR = findViewById(R.id.buttonR);
+        btnR.setTag("r");
+        btnR.setOnClickListener(myClickListner);
+        btnS = findViewById(R.id.buttonS);
+        btnS.setTag("s");
+        btnS.setOnClickListener(myClickListner);
+        btnT = findViewById(R.id.buttonT);
+        btnT.setTag("t");
+        btnT.setOnClickListener(myClickListner);
+        btnU = findViewById(R.id.buttonU);
+        btnU.setTag("u");
+        btnU.setOnClickListener(myClickListner);
+        btnV = findViewById(R.id.buttonV);
+        btnV.setTag("v");
+        btnV.setOnClickListener(myClickListner);
+        btnW = findViewById(R.id.buttonW);
+        btnW.setTag("w");
+        btnW.setOnClickListener(myClickListner);
+        btnX = findViewById(R.id.buttonX);
+        btnX.setTag("x");
+        btnX.setOnClickListener(myClickListner);
+        btnY = findViewById(R.id.buttonY);
+        btnY.setTag("y");
+        btnY.setOnClickListener(myClickListner);
+        btnZ = findViewById(R.id.buttonZ);
+        btnZ.setTag("z");
+        btnZ.setOnClickListener(myClickListner);
+        btnÆ = findViewById(R.id.buttonÆ);
+        btnÆ.setTag("æ");
+        btnÆ.setOnClickListener(myClickListner);
+        btnØ = findViewById(R.id.buttonØ);
+        btnØ.setTag("ø");
+        btnØ.setOnClickListener(myClickListner);
+        btnÅ = findViewById(R.id.buttonÅ);
+        btnÅ.setTag("å");
+        btnÅ.setOnClickListener(myClickListner);
+
+
     }
 
     public void opdaterBilled(int liv){
