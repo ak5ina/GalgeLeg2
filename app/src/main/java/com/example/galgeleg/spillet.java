@@ -32,8 +32,8 @@ public class spillet extends AppCompatActivity {
     private SharedPreferences.Editor mEditor;
     //
     private Galgelogik gl;
-    private TextView text_ordet;
-    int antal;
+    private TextView text_ordet, antalLiv;
+    int antal, liv;
     LocalTime startTime;
     LocalTime endTime;
     Button btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ, btnÆ, btnØ, btnÅ;
@@ -47,6 +47,7 @@ public class spillet extends AppCompatActivity {
         setContentView(R.layout.activity_spillet);
         antal = 0;
         startTime = LocalTime.now();
+        liv = 7;
 
         //sharedpref
         mpreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -72,12 +73,15 @@ public class spillet extends AppCompatActivity {
                 v.setEnabled(false);
 
                 String tag = (String) v.getTag();
+                antalLiv = findViewById(R.id.textView_antalliv);
                 antal++;
                 gl.gætBogstav(tag);
                 text_ordet.setText(gl.getSynligtOrd());
 
                 if (!gl.erSidsteBogstavKorrekt()) {
                     opdaterBilled(gl.getAntalForkerteBogstaver());
+                    liv--;
+                    antalLiv.setText(liv + " Liv");
                 }
 
                 if (gl.erSpilletSlut()){
@@ -222,6 +226,7 @@ public class spillet extends AppCompatActivity {
         btnÅ = findViewById(R.id.buttonÅ);
         btnÅ.setTag("å");
         btnÅ.setOnClickListener(myClickListner);
+
 
 
     }
