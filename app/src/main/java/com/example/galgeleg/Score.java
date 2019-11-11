@@ -12,12 +12,6 @@ public class Score {
         this.fejl = fejl;
     }
 
-    public ArrayList<Score> rankedList(ArrayList<Score> unsortedAList){
-        ArrayList<Score> sortedAList = new ArrayList<>();
-
-
-        return sortedAList;
-    }
 
 
     //----------------------------
