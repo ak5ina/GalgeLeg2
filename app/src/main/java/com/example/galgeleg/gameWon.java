@@ -2,11 +2,13 @@ package com.example.galgeleg;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -19,6 +21,8 @@ public class gameWon extends AppCompatActivity {
 
     private SharedPreferences mpreferences;
     private SharedPreferences.Editor mEditor;
+    private String newtime;
+    private Score newScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,31 +36,38 @@ public class gameWon extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String forkerte, antal, tid;
+        int dificult;
         forkerte = "FEJL";
         antal = "FEJL";
         tid = "FEJL";
+        dificult = 999;
 
 
         if (extras != null){
             forkerte = extras.getString("forkert");
             antal = extras.getString("antal");
             tid = extras.getString("tid");
+            dificult = extras.getInt("dificult");
         }
 
         TextView tv = findViewById(R.id.text_won_turns);
         TextView tv2 = findViewById(R.id.text_won_errors);
         TextView tv3 = findViewById(R.id.text_won_time);
+        final EditText ed1 = findViewById(R.id.text_won_navn);
 
         tv.setText("Du gjorde det på: " + antal + " ture!");
         tv2.setText("Du havde: " + forkerte + " forkert(e) gæt i løbet af spillet.");
         tv3.setText("Du blev færdig på: " + tid + " sekunder!");
 
-        updateSharedPreferences();
-
         Button btn = findViewById(R.id.btn_start_page);
+        final String finalTid = tid;
+        final String finalForkerte = forkerte;
+        final int finalDificult = dificult;
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                newScore = new Score(finalTid, finalForkerte, ed1.getText().toString(), Integer.toString(finalDificult));
+                updateSharedPreferences();
                 finish();
             }
         });
@@ -68,30 +79,44 @@ public class gameWon extends AppCompatActivity {
         ArrayList<String> bigList = new ArrayList<>();
         ArrayList<Score> scoreList = new ArrayList<>();
 
-        bigList.add(mpreferences.getString("new", "fejl"));
         bigList.add(mpreferences.getString("5","fejl"));
         bigList.add(mpreferences.getString("4","fejl"));
         bigList.add(mpreferences.getString("3","fejl"));
         bigList.add(mpreferences.getString("2","fejl"));
         bigList.add(mpreferences.getString("1","fejl"));
 
+        scoreList.add(newScore);
+
         //Smider værdierne over i en scoreliste som jeg rangere     senere
         for (String a : bigList) {
             if (!a.equals("fejl")) {
-                String[] splitterList = a.split(" ", 2);
+                String[] splitterList = a.split(" ", 4);
                 if (splitterList.length > 1) {
-                    Score score = new Score(splitterList[0], splitterList[1]);
+                    Score score = new Score(splitterList[0], splitterList[1], splitterList[2], splitterList[3]);
                     scoreList.add(score);
                 }
             }
         }
 
         //rangere min scoreliste
+
+        //her rangere den efter sværhed
+        Collections.sort(scoreList, new Comparator<Score>() {
+            @Override
+            public int compare(Score o1, Score o2) {
+                return Integer.parseInt(o2.getDifficult()) - Integer.parseInt(o1.getDifficult());
+            }
+        });
+
+
             //her rangere den efter antal fejl
         Collections.sort(scoreList, new Comparator<Score>() {
             @Override
             public int compare(Score o1, Score o2) {
-                return Integer.parseInt(o1.getFejl()) - Integer.parseInt(o2.getFejl());
+                if (Integer.parseInt(o1.getDifficult()) == Integer.parseInt(o2.getDifficult())) {
+                    return Integer.parseInt(o1.getFejl()) - Integer.parseInt(o2.getFejl());
+                }
+                return 0;
             }
         });
 
@@ -99,7 +124,7 @@ public class gameWon extends AppCompatActivity {
         Collections.sort(scoreList, new Comparator<Score>() {
             @Override
             public int compare(Score o1, Score o2) {
-                if (Integer.parseInt(o1.getFejl()) == Integer.parseInt(o2.getFejl())) {
+                if (Integer.parseInt(o1.getFejl()) == Integer.parseInt(o2.getFejl()) && Integer.parseInt(o1.getDifficult()) == Integer.parseInt(o2.getDifficult())) {
                     return Integer.parseInt(o1.getTid()) - Integer.parseInt(o2.getTid());
                 }
                 return 0;
@@ -108,7 +133,7 @@ public class gameWon extends AppCompatActivity {
             //Gemmer dem som strings i sharedpref
         for (int i = 0; i < scoreList.size(); i++) {
             String objektString;
-            objektString = scoreList.get(i).getTid() + " " + scoreList.get(i).getFejl();
+            objektString = scoreList.get(i).getTid() + " " + scoreList.get(i).getFejl() + " " + scoreList.get(i).getNavn() + " " + scoreList.get(i).getDifficult();
 
             switch (i) {
                 case 0:

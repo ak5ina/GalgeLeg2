@@ -1,74 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/background2"
-    tools:context=".gameWon">
-
-    <TextView
-        android:id="@+id/text_won_errors"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_won_turns" />
-
-    <TextView
-        android:id="@+id/text_won_time"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_won_errors" />
+    android:paddingLeft="10dp">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="TILYKKE!!! Du har vundet spillet! og med kun meget for gæt :o wow!"
+        android:layout_marginTop="20dp"
+        android:text="Tillykke du vandt spillet! Skriv dit navn og tryk på knappen!"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/text_won_navn"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent"
+        android:maxLines="1"
+        android:text=""
+        android:hint="Intast navn"
+        android:paddingLeft="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/text_won_errors"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/text_won_time"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="30sp" />
+
 
     <TextView
         android:id="@+id/text_won_turns"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btn_start_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Start siden"
+        android:layout_marginTop="20dp"
+        android:text="Start side / Save"
+        android:layout_gravity="center"
 
         android:textColor="#FFFFFF"
         android:textSize="22sp"
-        android:background="@drawable/btn_shape_mainactivity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_won_time" />
+        android:background="@drawable/btn_shape_mainactivity"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
