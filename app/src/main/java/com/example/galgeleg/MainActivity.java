@@ -3,6 +3,7 @@ package com.example.galgeleg;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,9 +26,15 @@ public class MainActivity extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), spillet.class);
-                startActivity(in);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                openDialog2();
+
+
+                //old
+//                Intent in = new Intent(getApplicationContext(), spillet.class);
+//                Intent in2 = new Intent(MainActivity.this, setLevelA.class);
+//
+//                startActivity(in2);
+//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -60,11 +67,65 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = MainActivity.this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_box, null);
         alert.setPositiveButton("OK", null);  //This is my Solution to this question(adding OK button)
-        alert.setCancelable(false);
+        alert.setCancelable(true);
         alert.setInverseBackgroundForced(true);
         alert.setView(dialogView);
         alert.show();
         //alert.setInverseBackgroundForced(true);
+    }
+
+    public void openDialog2() {
+        final AlertDialog.Builder alert;
+        alert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.activity_set_level, null);
+        alert.setPositiveButton("Close", null);  //cancel knap
+        alert.setCancelable(true);
+        alert.setInverseBackgroundForced(true);
+        alert.setView(dialogView);
+        alert.show();
+
+        Button btn_easy = dialogView.findViewById(R.id.btn_easy);
+        Button btn_hard = dialogView.findViewById(R.id.btn_hard);
+        Button btn_comp = dialogView.findViewById(R.id.btn_comp);
+
+        btn_hard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), spillet.class);
+                in.putExtra("difficult", 1);
+                startActivity(in);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+
+            }
+        });
+
+        btn_easy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), spillet.class);
+                in.putExtra("difficult", 0);
+                startActivity(in);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+
+            }
+        });
+
+        btn_comp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), spillet.class);
+                in.putExtra("difficult", 2);
+                startActivity(in);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+
+            }
+        });
+
+
     }
 
 

@@ -55,11 +55,18 @@ public class spillet extends AppCompatActivity {
 
 
         gl = new Galgelogik();
+        final int difficult = getIntent().getIntExtra("difficult",0);
+        if (difficult == 0){
+            gl.standartListen();
+        } else if (difficult == 1) {
 
-        try {
-            gl.hentOrdFraDr();
-        } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                gl.hentOrdFraDr();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (difficult == 2) {
+            gl.privateord("her");
         }
 
         text_ordet = findViewById(R.id.text_ordet);
@@ -106,6 +113,7 @@ public class spillet extends AppCompatActivity {
                         //---
 
                         in2.putExtra("tid",timeString);
+                        in2.putExtra("difficult", difficult);
 
                         startActivity(in2);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -269,6 +277,8 @@ public class spillet extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
+        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(in);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }
