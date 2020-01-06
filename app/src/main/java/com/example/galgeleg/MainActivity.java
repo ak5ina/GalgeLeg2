@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), spillet.class);
-                in.putExtra("difficult", 1);
+                in.putExtra("difficult", 2);
                 startActivity(in);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), spillet.class);
-                in.putExtra("difficult", 0);
+                in.putExtra("difficult", 1);
                 startActivity(in);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), spillet.class);
-                in.putExtra("difficult", 2);
+                in.putExtra("difficult", 0);
                 startActivity(in);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();

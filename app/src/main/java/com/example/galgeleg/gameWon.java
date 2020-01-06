@@ -47,7 +47,7 @@ public class gameWon extends AppCompatActivity {
             forkerte = extras.getString("forkert");
             antal = extras.getString("antal");
             tid = extras.getString("tid");
-            dificult = extras.getInt("dificult");
+            dificult = extras.getInt("difficult");
         }
 
         TextView tv = findViewById(R.id.text_won_turns);

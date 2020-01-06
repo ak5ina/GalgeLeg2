@@ -56,16 +56,16 @@ public class spillet extends AppCompatActivity {
 
         gl = new Galgelogik();
         final int difficult = getIntent().getIntExtra("difficult",0);
-        if (difficult == 0){
+        if (difficult == 1){
             gl.standartListen();
-        } else if (difficult == 1) {
+        } else if (difficult == 2) {
 
             try {
                 gl.hentOrdFraDr();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (difficult == 2) {
+        } else if (difficult == 0) {
             gl.privateord("her");
         }
 

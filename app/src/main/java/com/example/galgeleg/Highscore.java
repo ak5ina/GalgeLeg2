@@ -21,6 +21,7 @@ public class Highscore extends AppCompatActivity {
     String header[];
     String time[];
     String errors[];
+    String difis[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,13 @@ public class Highscore extends AppCompatActivity {
         header = new String[5];
         time = new String[5];
         errors = new String[5];
+        difis = new String[5];
 
         checkSharedPreferences();
 
         ListView lv = (ListView) findViewById(R.id.list_try);
 
-        lv.setAdapter(new CustomAdapter(Highscore.this, icons, header, time, errors));
+        lv.setAdapter(new CustomAdapter(Highscore.this, icons, header, time, errors, difis));
 
 
         //Finder alt den data vi smider i high scoren:
@@ -63,17 +65,28 @@ public class Highscore extends AppCompatActivity {
         bigList.add(mpreferences.getString("4","fejl"));
         bigList.add(mpreferences.getString("5","fejl"));
 
+        String difiord = "fejl";
+
 
         //Smider værdierne over i time og errors (og måske header senere)
         int i = 0;
         for (String a : bigList) {
             if (!a.equals("fejl")) {
-                String[] splitterList = a.split(" ", 2);
+                String[] splitterList = a.split(" ", 4);
                 if (splitterList.length > 1) {
+
+                    if (splitterList[3].equals("0")){
+                        difiord = "Selv valgt";
+                    } else if (splitterList[3].equals("1")){
+                        difiord = "Let";
+                    } else if (splitterList[3].equals("2")) {
+                        difiord = "SVÆR!";
+                    }
 
                     time[i] = "Tid: " + splitterList[0] + " Sekunder.";
                     errors[i] = "Fejl: " + splitterList[1];
-                    header[i] = "Header: " + (i+1);
+                    header[i] = splitterList[2];
+                    difis[i] = "Sværhed: " + difiord;
 
                 }
             }
