@@ -1,6 +1,7 @@
 package com.example.galgeleg;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -37,7 +39,7 @@ public class spillet extends AppCompatActivity {
     LocalTime startTime;
     LocalTime endTime;
     Button btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ, btnÆ, btnØ, btnÅ;
-    View.OnClickListener myClickListner;
+    Intent intent;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -55,7 +57,10 @@ public class spillet extends AppCompatActivity {
 
 
         gl = new Galgelogik();
-        final int difficult = getIntent().getIntExtra("difficult",0);
+
+        intent = getIntent();
+
+        final int difficult = intent.getIntExtra("difficult",0);
         if (difficult == 1){
             gl.standartListen();
         } else if (difficult == 2) {
@@ -66,7 +71,10 @@ public class spillet extends AppCompatActivity {
                 e.printStackTrace();
             }
         } else if (difficult == 0) {
-            gl.privateord("her");
+
+            String detNyeOrd = intent.getStringExtra("detNyeOrd");
+
+            gl.privateord(detNyeOrd);
         }
 
         text_ordet = findViewById(R.id.text_ordet);
@@ -272,13 +280,16 @@ public class spillet extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         finish();
+
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
     public void finish() {
         super.finish();
-        Intent in = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(in);
+
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+
+
 }

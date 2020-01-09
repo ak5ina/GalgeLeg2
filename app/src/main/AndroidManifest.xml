@@ -14,6 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".choice_ord"></activity>
+        <activity android:name=".choice_game" />
         <activity android:name=".gameLost" />
         <activity android:name=".Highscore" />
         <activity android:name=".gameWon" />
