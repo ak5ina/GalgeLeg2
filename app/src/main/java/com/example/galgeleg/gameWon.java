@@ -1,25 +1,32 @@
 package com.example.galgeleg;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.github.jinatonic.confetti.CommonConfetti;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import javax.xml.transform.Result;
 
 public class gameWon extends AppCompatActivity {
 
@@ -29,6 +36,8 @@ public class gameWon extends AppCompatActivity {
     private Score newScore;
     private SoundPool soundPool;
     private int sound;
+
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +49,10 @@ public class gameWon extends AppCompatActivity {
 
 
         //HENTET FRA YOUTUBE https://www.youtube.com/watch?v=fIWPSni7kUk
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder().
-                    setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION).
-                    setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build();
+                    setUsage(AudioAttributes.USAGE_GAME).
+                    setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build();
 
             soundPool = new SoundPool.Builder()
                     .setMaxStreams(1)
@@ -53,8 +62,29 @@ public class gameWon extends AppCompatActivity {
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
         }
 
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                PlaySound();
+            }
+        });
+
+
         sound = soundPool.load(this,R.raw.flag_won, 1);
-        soundPool.play(sound, 1, 1, 0, 0, 1);
+
+        //CONFETTI
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                CommonConfetti.rainingConfetti(
+                        (ViewGroup) ((ViewGroup) gameWon.this.findViewById(android.R.id.content)).getChildAt(0)
+                        ,
+                        new int[]{Color.RED, Color.YELLOW })
+                        .infinite();
+            }
+        });
+
+
 
 
 
@@ -190,9 +220,20 @@ public class gameWon extends AppCompatActivity {
 
     }
 
+    public void PlaySound(){
+        soundPool.play(sound, 1f, 1f, 0, 0, 1f);
+    }
+
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        soundPool.release();
+        soundPool = null;
     }
 }
