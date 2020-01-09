@@ -23,20 +23,9 @@ public class Galgelogik {
   private boolean spilletErTabt;
 
   public Galgelogik(){
-//    muligeOrd.add("bil");
-//    muligeOrd.add("computer");
-//    muligeOrd.add("programmering");
-//    muligeOrd.add("motorvej");
-//    muligeOrd.add("busrute");
-//    muligeOrd.add("gangsti");
-//    muligeOrd.add("skovsnegl");
-//    muligeOrd.add("solsort");
-//    muligeOrd.add("nitten");
-//    nulstil();
-
-
 
   }
+
 
 
   public ArrayList<String> getBrugteBogstaver() {
@@ -177,6 +166,29 @@ public class Galgelogik {
     System.out.println("muligeOrd = " + muligeOrd);
     nulstil();
   }
+
+  public void privateord(String detNyeOrd){
+
+    muligeOrd.add(detNyeOrd);
+    nulstil();
+
+  }
+
+  public void standartListen(){
+
+    muligeOrd.add("bil");
+    muligeOrd.add("hund");
+    muligeOrd.add("kat");
+    muligeOrd.add("mus");
+    muligeOrd.add("fugl");
+    muligeOrd.add("løve");
+    muligeOrd.add("giraf");
+    muligeOrd.add("panda");
+    muligeOrd.add("penge");
+    nulstil();
+
+  }
+
 
 
   /**

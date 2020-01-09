@@ -16,14 +16,17 @@ public class CustomAdapter extends BaseAdapter {
     String header[];
     String time[];
     String errors[];
+    String difis[];
+    String difstring, difstring2;
 
-    public CustomAdapter(Context context, int icons[], String header[], String time[], String errors[]){
+    public CustomAdapter(Context context, int icons[], String header[], String time[], String errors[], String difis[]){
 
         this.context = context;
         this.icons = icons;
         this.header = header;
         this.time = time;
         this.errors = errors;
+        this.difis = difis;
 
     }
 
@@ -58,11 +61,14 @@ public class CustomAdapter extends BaseAdapter {
         TextView head = (TextView) row.findViewById(R.id.item_header);
         TextView fail = (TextView) row.findViewById(R.id.item_errors);
         TextView tid = (TextView) row.findViewById(R.id.item_time);
+        TextView difi = (TextView) row.findViewById(R.id.item_dificult);
 
         img.setImageResource(icons[position]);
         head.setText(header[position]);
         fail.setText(errors[position]);
         tid.setText(time[position]);
+        difi.setText(difis[position]);
+
 
         return row;
     }
